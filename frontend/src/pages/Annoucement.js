@@ -94,7 +94,6 @@ export default function Annoucement() {
     } finally {
       setIsLoading(false);
       fetchData();
-      navigate("/teacher/dashboard");
     }
   };
 

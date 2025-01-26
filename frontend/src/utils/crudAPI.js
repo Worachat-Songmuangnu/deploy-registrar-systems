@@ -3,7 +3,7 @@ import conf from "../conf/main";
 
 export const updateScoreCondition = (scores) => {
   return scores.map(async (score) => {
-    if (score.status === "delete") {
+    if (score.status === "delete" || score.status === "hdelete") {
       await ax.delete(conf.scoreDeleteEndpoint(score.documentId));
     } else if (score.documentId) {
       await ax.put(conf.scoreUpdateEndpoint(score.documentId), {
