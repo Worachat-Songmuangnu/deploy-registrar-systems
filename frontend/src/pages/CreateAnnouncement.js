@@ -145,7 +145,6 @@ export default function CreateAnnouncement() {
           <div className="flex flex-row justify-end gap-3 mt-5">
             <button
               type="submit"
-              onClick={() => navigate("/teacher/dashboard")}
               className="text-white font-semibold bg-primarydark  focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  "
             >
               Save change
