@@ -52,8 +52,11 @@ export default function StudentDashboard() {
               return (
                 score.announcement.subject_name
                   .toLowerCase()
-                  .includes(lowerCaseSearchTerm) || // ค้นหาจากชื่อวิชา
+                  .includes(lowerCaseSearchTerm) ||
                 score.announcement.Teacher?.[0]?.Name.toLowerCase().includes(
+                  lowerCaseSearchTerm
+                ) ||
+                score.announcement.Title?.toLowerCase().includes(
                   lowerCaseSearchTerm
                 ) || // ค้นหาจากชื่อครู
                 score.score.toString().includes(lowerCaseSearchTerm) || // ค้นหาจากคะแนน

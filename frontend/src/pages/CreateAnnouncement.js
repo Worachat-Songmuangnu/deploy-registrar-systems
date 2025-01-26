@@ -93,7 +93,6 @@ export default function CreateAnnouncement() {
           <p className="text-3xl">Create New Annoucement</p>
         </div>
         <HrLine />
-        <Readexcel edit={true} scores={scores} setScores={setScores} />
         <form className="flex flex-col " onSubmit={handleSave}>
           <div className="flex flex-row mb-5 justify-center items-center ">
             <input
@@ -142,6 +141,8 @@ export default function CreateAnnouncement() {
               handleDeleteRow={(e, id) => handleDeleteRow(setScores, e, id)}
             />
           </div>
+          <Readexcel edit={true} scores={scores} setScores={setScores} />
+
           <div className="flex flex-row justify-end gap-3 mt-5">
             <button
               type="submit"

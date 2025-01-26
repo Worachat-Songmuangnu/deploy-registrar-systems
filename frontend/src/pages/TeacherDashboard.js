@@ -116,14 +116,14 @@ export default function TeacherDashboard() {
         </div>
         <button
           onClick={() => setShowArchivePopup(true)}
-          className="flex flex-row text-nowrap items-center gap-4 ml-2 mr-2 w-fit px-5 py-1 boder bg-red-500 text-white font-semibold rounded-lg"
+          className="flex flex-row text-nowrap items-center gap-4 ml-2 mr-2 w-fit px-5 py-1 shadow-md transition hover:bg-red-300 hover:shadow-lg boder bg-red-500 text-white font-semibold rounded-lg"
         >
           <EyeIcon className="size-5 " />
           View Archived
         </button>
         <button
           onClick={() => navigate("/teacher/announcement")}
-          className="flex flex-row text-nowrap items-center gap-2 w-fit px-8 py-1.5 bg-primarydark text-white font-semibold rounded-lg"
+          className="flex flex-row text-nowrap items-center gap-2 w-fit px-8 py-1.5 shadow-md transition hover:bg-blue-500 hover:shadow-lg bg-primarydark text-white font-semibold rounded-lg"
         >
           <PlusCircleIcon className="size-5 " />
           Add Annoucement
