@@ -6,10 +6,10 @@ const UserDetails = React.memo(({ user, logout }) => {
 
   return (
     <div className="text-white">
-      Login as:{" "}
-      <span className="hover:underline">
+      Login as : {user.username}
+      <span className="p-4 ml-4 hover:underline">
         <a href="/#" onClick={logout}>
-          {user.username}
+          Logout
         </a>
       </span>
     </div>

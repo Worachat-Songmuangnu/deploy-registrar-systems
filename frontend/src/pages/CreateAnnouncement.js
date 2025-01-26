@@ -76,6 +76,7 @@ export default function CreateAnnouncement() {
       alert("Error creating announcement:" + error.message);
     } finally {
       setIsLoading(false);
+      navigate("/teacher/dashboard");
     }
   };
 
