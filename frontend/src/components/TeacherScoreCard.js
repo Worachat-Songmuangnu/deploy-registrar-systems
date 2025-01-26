@@ -48,23 +48,13 @@ export default function TeacherScoreCard(props) {
           <PencilSquareIcon className="size-5" />
           Edit
         </button>
-        {props.status === "publish" ? (
-          <button
-            onClick={() => props.handleArchive(props.id)}
-            className="flex flex-row items-center justify-center gap-3 transition py-1.5 border-red-800 border-2 text-red-800 rounded-lg hover:bg-red-800 hover:text-white"
-          >
-            <ArchiveBoxArrowDownIcon className="size-5" />
-            Archive
-          </button>
-        ) : (
-          <button
-            onClick={() => props.handleArchive(props.id)}
-            className="flex flex-row items-center justify-center gap-3 transition py-1.5 border-red-800 border-2 text-red-800 rounded-lg hover:bg-red-800 hover:text-white"
-          >
-            <ArchiveBoxArrowDownIcon className="size-5" />
-            Archive
-          </button>
-        )}
+        <button
+          onClick={() => props.handleArchive(props.id)}
+          className="flex flex-row items-center justify-center gap-3 transition py-1.5 border-red-800 border-2 text-red-800 rounded-lg hover:bg-red-800 hover:text-white"
+        >
+          <ArchiveBoxArrowDownIcon className="size-5" />
+          Archive
+        </button>
       </div>
     </div>
   );

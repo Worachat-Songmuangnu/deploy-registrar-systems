@@ -1,24 +1,34 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import readXlsxFile from "read-excel-file";
+import { handleDeleteRow } from "../utils/handle";
 
 export default function ReadExcel(props) {
   const fileInputRef = useRef(null);
   //   useEffect(() => {
   //     console.log(data);
   //   }, [data]);
-
+  useEffect(() => {
+    console.log(props.scores);
+  }, [props.scores]);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      props.setScores((prevData) =>
+        prevData.map((row) => {
+          return {
+            ...row,
+            status: "hdelete",
+          };
+        })
+      );
       readXlsxFile(file).then((rows) => {
-        console.log("Excel Data:", rows);
         const dataWithIds = rows.slice(1).map((row, index) => ({
           id: index, // Unique identifier for each row
           username: String(row[0]),
           name: String(row[1]),
           score: String(row[2]),
         }));
-        props.setScores(dataWithIds); // Initialize state with the processed data
+        props.setScores((prevData) => [...prevData, ...dataWithIds]);
       });
     }
   };
@@ -39,7 +49,6 @@ export default function ReadExcel(props) {
         id="file-input"
         accept=".xlsx"
         onChange={handleFileChange}
-        required
       />
       <input />
     </div>
