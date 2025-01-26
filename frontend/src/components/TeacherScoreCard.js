@@ -2,9 +2,11 @@ import {
   EyeIcon,
   PencilSquareIcon,
   ArchiveBoxArrowDownIcon,
+  ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import ExportExcel from "./ExportExcel";
 
 export default function TeacherScoreCard(props) {
   const navigate = useNavigate();
@@ -55,6 +57,7 @@ export default function TeacherScoreCard(props) {
           <ArchiveBoxArrowDownIcon className="size-5" />
           Archive
         </button>
+        <ExportExcel title={props.title} />
       </div>
     </div>
   );
