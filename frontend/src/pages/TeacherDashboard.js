@@ -158,7 +158,6 @@ export default function TeacherDashboard() {
             .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
             .map((announcement) => (
               <TeacherScoreCard
-                key={announcement.id}
                 id={announcement.id}
                 title={announcement.Title}
                 name={announcement.subject_name}

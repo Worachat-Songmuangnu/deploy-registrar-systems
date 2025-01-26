@@ -12,7 +12,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.28.2",
     "react-scripts": "5.0.1",
-    "read-excel-file": "^5.8.6"
+    "read-excel-file": "^5.8.6",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
