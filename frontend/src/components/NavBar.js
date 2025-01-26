@@ -1,16 +1,22 @@
 import { useAuth } from "../context/useAuth";
 import React from "react";
+import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 
 const UserDetails = React.memo(({ user, logout }) => {
   if (!user) return null;
 
   return (
-    <div className="text-white">
+    <div className="flex flex-row text-white">
       Login as : {user.username}
-      <span className="p-4 ml-4 hover:underline">
-        <a href="/#" onClick={logout}>
+      <span className=" ml-4 hover:underline">
+        <botton
+          href="/#"
+          onClick={logout}
+          className="flex flex-row items-center"
+        >
+          <ArrowRightEndOnRectangleIcon className="size-5 " />
           Logout
-        </a>
+        </botton>
       </span>
     </div>
   );

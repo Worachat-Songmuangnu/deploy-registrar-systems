@@ -26,14 +26,14 @@ export default function ReadExcel(props) {
   return (
     <div>
       <label
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="block mb-2 text-sm font-medium text-gray-900 "
         htmlFor="file_input"
       >
         Upload file
       </label>
       <input
         disabled={!props.edit}
-        className="p-4 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        className="p-4 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none  "
         ref={fileInputRef}
         type="file"
         id="file-input"

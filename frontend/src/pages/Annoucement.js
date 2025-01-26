@@ -124,7 +124,6 @@ export default function Annoucement() {
           </label>
         </div>
         <HrLine />
-        <ReadExcel edit={edit} scores={scores} setScores={setScores} />
         <form onSubmit={(e) => handleSave(e)} className="flex flex-col ">
           <AnnouncementInfo
             edit={edit}
@@ -143,6 +142,8 @@ export default function Annoucement() {
               handleDeleteRow={(e, id) => handleDeleteRow(setScores, e, id)}
             />
           </div>
+          <ReadExcel edit={edit} scores={scores} setScores={setScores} />
+
           <div className="flex flex-row justify-end gap-3 mt-5">
             <button
               type="submit"
