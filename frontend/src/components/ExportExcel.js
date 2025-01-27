@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import ax from "../conf/ax";
 import dayjs from "dayjs";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import { fetchExportExcel } from "../conf/main";
 export default function ExportExcel({ title }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,6 +11,7 @@ export default function ExportExcel({ title }) {
     try {
       setIsLoading(true);
 
+      const res = await ax.get(fetchExportExcel(title));
       const scores = res.data.data[0]?.scores || [];
 
       if (scores.length === 0) {

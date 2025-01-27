@@ -16,6 +16,8 @@ const conf = {
   announcementUpdateEndpoint: (documentId) => `/announcements/${documentId}`,
   fetchStudentAnnouncementEndpoint: (username) =>
     `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate=students&filters[username]=${username}`,
+  fetchExportExcel: (title) =>
+    `/announcements?populate=scores&filters[Title]=${title}`,
 };
 
 export default conf;
