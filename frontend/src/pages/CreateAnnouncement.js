@@ -14,7 +14,11 @@ import AnnouncementInfo from "../components/AnnouncementInfo";
 export default function CreateAnnouncement() {
   const { user } = useAuth();
 
-  const [announcement, setAnnouncement] = useState({ title: "", subject_name: "", max_score: "" });
+  const [announcement, setAnnouncement] = useState({
+    Title: "",
+    subject_name: "",
+    max_score: "",
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   const [scores, setScores] = useState([]);
@@ -55,7 +59,7 @@ export default function CreateAnnouncement() {
 
     const announcementData = {
       data: {
-        Title: announcement.title || "",
+        Title: announcement.Title || "",
         subject: announcement.subject_id || null,
         subject_id: announcement.subject_id || null,
         max_score: announcement.max_score,
@@ -94,13 +98,19 @@ export default function CreateAnnouncement() {
         </div>
         <HrLine />
         <form className="flex flex-col " onSubmit={handleSave}>
-          <AnnouncementInfo edit={true} announcement={announcement} setAnnouncement={setAnnouncement} />
+          <AnnouncementInfo
+            edit={true}
+            announcement={announcement}
+            setAnnouncement={setAnnouncement}
+          />
           <div className="mt-4">
             <EditableTable
               scores={scores}
               maxScore={announcement.max_score}
               edit={true}
-              handleChange={(id, field, value) => handleChange(setScores, id, field, value)}
+              handleChange={(id, field, value) =>
+                handleChange(setScores, id, field, value)
+              }
               handleAddRow={(count) => handleAddRow(scores, setScores, count)}
               handleDeleteRow={(e, id) => handleDeleteRow(setScores, e, id)}
             />
