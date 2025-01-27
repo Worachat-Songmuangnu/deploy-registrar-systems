@@ -1,5 +1,5 @@
 const conf = {
-  apiUrlPrefix: "https://natural-dance-6ec6822c07.strapiapp.com/api",
+  apiUrlPrefix: "http://localhost:1337/api",
   loginEndpoint: "/auth/local",
   jwtSessionStorageKey: "auth.jwt",
   jwtRoleEndpoint: "users/me?populate=role",
