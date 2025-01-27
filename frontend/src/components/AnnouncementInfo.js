@@ -29,11 +29,11 @@ export default function AnnouncementInfo(props) {
           disabled={!props.edit}
           type="text"
           id="title"
-          value={props.announcement.Title}
+          value={props.announcement.title}
           onChange={(e) =>
             props.setAnnouncement((prev) => ({
               ...prev,
-              Title: e.target.value,
+              title: e.target.value,
             }))
           }
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -59,7 +59,8 @@ export default function AnnouncementInfo(props) {
             <option value="">Select a subject</option>
             {subjectOptions?.map((subject) => (
               <option key={subject.id} value={subject.id}>
-                {subject.subject_id.slice(0, 3)}-{subject.subject_id.slice(3)} {subject.Name}
+                {subject.subject_id.slice(0, 3)}-{subject.subject_id.slice(3)}{" "}
+                {subject.Name}
               </option>
             ))}
           </select>
