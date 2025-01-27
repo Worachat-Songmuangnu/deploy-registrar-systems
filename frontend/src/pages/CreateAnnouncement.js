@@ -15,7 +15,7 @@ export default function CreateAnnouncement() {
   const { user } = useAuth();
 
   const [announcement, setAnnouncement] = useState({
-    Title: "",
+    title: "",
     subject_name: "",
     max_score: "",
   });
@@ -59,9 +59,9 @@ export default function CreateAnnouncement() {
 
     const announcementData = {
       data: {
-        Title: announcement.Title || "",
+        Title: announcement.title || "",
         subject: announcement.subject_id || null,
-        subject_id: Number(announcement.subject_id) || null,
+        subject_id: announcement.subject_id || null,
         max_score: announcement.max_score,
         postStatus: "publish",
         Teacher: { connect: { id: user.id } },

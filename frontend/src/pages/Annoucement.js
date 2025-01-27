@@ -78,7 +78,7 @@ export default function Annoucement() {
     const announcementData = {
       documentId: announcement.documentId,
       data: {
-        Title: announcement.Title,
+        Title: announcement.title,
         subject: announcement.subject_id || null,
         subject_id: announcement.subject_id || null,
         max_score: announcement.max_score,
@@ -108,7 +108,7 @@ export default function Annoucement() {
             <button className="" onClick={() => navigate("/teacher/dashboard")}>
               <ArrowLeftIcon className="size-8" />
             </button>
-            <p className="text-3xl">{announcement && announcement.Title}</p>
+            <p className="text-3xl">{announcement && announcement.title}</p>
           </div>
           <label className="inline-flex items-center cursor-pointer gap-4">
             <span className="ms-3 text-sm font-medium text-gray-900">
