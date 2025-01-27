@@ -11,7 +11,6 @@ import ExportExcel from "./ExportExcel";
 export default function TeacherScoreCard(props) {
   const navigate = useNavigate();
   return (
-    <div className="w-full shadow-primarydark border-2 h-fit rounded-lg flex flex-row p-5">
     <div className="w-full shadow-primarydark border-2 h-fit rounded-lg flex flex-row p-5 hover:shadow-lg transition hover:bg-gray-50">
       <div className="flex flex-col w-full justify-between">
         <div>
