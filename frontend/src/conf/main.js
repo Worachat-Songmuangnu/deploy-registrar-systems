@@ -5,7 +5,7 @@ const conf = {
   jwtRoleEndpoint: "users/me?populate=role",
   jwtUserEndpoint: "/users/me",
   fetchTeacherAnnouncementEndpoint: (username, announcementId) =>
-    `/announcements?populate=scores&filters[Teacher][username]=${username}&filters[id]=${announcementId}`,
+    `announcements?populate=scores&populate=subject&filters[Teacher][username]=${username}&filters[id]=${announcementId}`,
   fetchTeacherAllAnnouncementEndpoint: (username) =>
     `/announcements?populate=Teacher&populate=scores&populate=student&filters[Teacher][username]=${username}`,
   announcementCreateEndpoint: `/announcements`,
@@ -15,7 +15,8 @@ const conf = {
   scoreCreateEndpoint: `/scores/`,
   announcementUpdateEndpoint: (documentId) => `/announcements/${documentId}`,
   fetchStudentAnnouncementEndpoint: (username) =>
-    `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate=students&filters[username]=${username}`,
+    `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate[announcement][populate][1]=subject&populate=students&filters[username]=${username}`,
+  fetchAllSubject: `/subjects`,
 };
 
 export default conf;

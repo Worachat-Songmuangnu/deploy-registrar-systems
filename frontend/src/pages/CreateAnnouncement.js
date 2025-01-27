@@ -10,12 +10,11 @@ import { handleAddRow, handleChange, handleDeleteRow } from "../utils/handle";
 import { updateScoreCondition } from "../utils/crudAPI";
 import conf from "../conf/main";
 import Readexcel from "../components/Readexecel";
+import AnnouncementInfo from "../components/AnnouncementInfo";
 export default function CreateAnnouncement() {
   const { user } = useAuth();
 
-  const [title, setTitle] = useState("");
-  const [subjectName, setSubjectName] = useState("");
-  const [maxScore, setMaxScore] = useState(null);
+  const [announcement, setAnnouncement] = useState({ title: "", subject_name: "", max_score: "" });
 
   const [isLoading, setIsLoading] = useState(false);
   const [scores, setScores] = useState([]);
@@ -56,9 +55,10 @@ export default function CreateAnnouncement() {
 
     const announcementData = {
       data: {
-        Title: title,
-        subject_name: subjectName,
-        max_score: maxScore,
+        Title: announcement.title || "",
+        subject: announcement.subject_id || null,
+        subject_id: announcement.subject_id || null,
+        max_score: announcement.max_score,
         postStatus: "publish",
         Teacher: { connect: { id: user.id } },
       },
@@ -94,49 +94,13 @@ export default function CreateAnnouncement() {
         </div>
         <HrLine />
         <form className="flex flex-col " onSubmit={handleSave}>
-          <div className="flex flex-row mb-5 justify-center items-center ">
-            <input
-              type="text"
-              id="title"
-              value={title || ""}
-              onChange={(e) => setTitle(e.target.value)}
-              className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-              placeholder="Title"
-              required
-            />
-          </div>
-          <div className="flex flex-row gap-4 w-full">
-            <div className="w-1/2">
-              <input
-                type="text"
-                id="subject name"
-                value={subjectName || ""}
-                onChange={(e) => setSubjectName(e.target.value)}
-                className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                placeholder="Subject name"
-                required
-              />
-            </div>
-            <div className="w-1/2 flex flex-row mb-5 justify-center items-center ">
-              <input
-                type="number"
-                id="maxScore"
-                className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                placeholder="MaxScore"
-                value={maxScore || ""}
-                onChange={(e) => setMaxScore(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          <AnnouncementInfo edit={true} announcement={announcement} setAnnouncement={setAnnouncement} />
           <div className="mt-4">
             <EditableTable
               scores={scores}
-              maxScore={maxScore}
+              maxScore={announcement.max_score}
               edit={true}
-              handleChange={(id, field, value) =>
-                handleChange(setScores, id, field, value)
-              }
+              handleChange={(id, field, value) => handleChange(setScores, id, field, value)}
               handleAddRow={(count) => handleAddRow(scores, setScores, count)}
               handleDeleteRow={(e, id) => handleDeleteRow(setScores, e, id)}
             />

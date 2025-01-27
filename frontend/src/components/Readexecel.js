@@ -4,12 +4,7 @@ import { handleDeleteRow } from "../utils/handle";
 
 export default function ReadExcel(props) {
   const fileInputRef = useRef(null);
-  //   useEffect(() => {
-  //     console.log(data);
-  //   }, [data]);
-  useEffect(() => {
-    console.log(props.scores);
-  }, [props.scores]);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -35,10 +30,7 @@ export default function ReadExcel(props) {
 
   return (
     <div>
-      <label
-        className="block mb-2 text-sm font-medium text-gray-900 "
-        htmlFor="file_input"
-      >
+      <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="file_input">
         Upload file
       </label>
       <input

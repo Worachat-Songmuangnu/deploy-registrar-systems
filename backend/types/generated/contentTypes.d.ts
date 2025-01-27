@@ -399,8 +399,9 @@ export interface ApiAnnouncementAnnouncement
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    subject: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
     subject_id: Schema.Attribute.String;
-    subject_name: Schema.Attribute.String & Schema.Attribute.Required;
+    subject_name: Schema.Attribute.String;
     Teacher: Schema.Attribute.Relation<
       'manyToMany',
       'plugin::users-permissions.user'
@@ -458,9 +459,13 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     singularName: 'subject';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    announcements: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement.announcement'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
