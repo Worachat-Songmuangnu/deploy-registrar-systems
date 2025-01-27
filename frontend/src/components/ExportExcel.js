@@ -11,7 +11,6 @@ export default function ExportExcel({ title }) {
     try {
       setIsLoading(true);
 
-      const res = await ax.get(fetchExportExcel(title));
       const scores = res.data.data[0]?.scores || [];
 
       if (scores.length === 0) {
