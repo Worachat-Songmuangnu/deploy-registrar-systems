@@ -61,7 +61,7 @@ export default function CreateAnnouncement() {
       data: {
         Title: announcement.Title || "",
         subject: announcement.subject_id || null,
-        subject_id: announcement.subject_id || null,
+        subject_id: Number(announcement.subject_id) || null,
         max_score: announcement.max_score,
         postStatus: "publish",
         Teacher: { connect: { id: user.id } },
