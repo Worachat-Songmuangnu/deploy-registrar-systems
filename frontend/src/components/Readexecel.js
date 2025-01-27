@@ -30,7 +30,10 @@ export default function ReadExcel(props) {
 
   return (
     <div>
-      <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="file_input">
+      <label
+        className="block mb-2 text-sm font-medium text-gray-900 "
+        htmlFor="file_input"
+      >
         Upload file
       </label>
       <input

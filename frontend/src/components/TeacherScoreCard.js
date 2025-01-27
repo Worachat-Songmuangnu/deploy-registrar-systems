@@ -1,4 +1,7 @@
-import { PencilSquareIcon, ArchiveBoxArrowDownIcon } from "@heroicons/react/24/outline";
+import {
+  PencilSquareIcon,
+  ArchiveBoxArrowDownIcon,
+} from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import ExportExcel from "./ExportExcel";
@@ -11,11 +14,16 @@ export default function TeacherScoreCard(props) {
         <div>
           <p className="font-bold text-lg text-primarydark">{props.title}</p>
           <p className=" text-lg text-primarydark">
-            {props.subject_code?.slice(0, 3)}-{props.subject_code?.slice(3)} {props.subject_name}
+            {props.subject_code?.slice(0, 3)}-{props.subject_code?.slice(3)}{" "}
+            {props.subject_name}
           </p>
           {/* <p className=" text-base text-primarydark">Section: 02</p> */}
-          <p className=" text-base text-primarydark">Total student : {props.total}</p>
-          <p className="text-base text-primarydark">Max score : {props.max_score}</p>
+          <p className=" text-base text-primarydark">
+            Total student : {props.total}
+          </p>
+          <p className="text-base text-primarydark">
+            Max score : {props.max_score}
+          </p>
         </div>
         <div className="flex flex-row gap-6 mt-2">
           <p className="text-sm font-thin text-primarydark">
