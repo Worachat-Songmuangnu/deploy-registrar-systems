@@ -26,7 +26,7 @@ export const ProtectedStudentRoute = ({ children }) => {
     );
   }
   return (
-    <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
+    <div className="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto ">
       {children}
     </div>
   );

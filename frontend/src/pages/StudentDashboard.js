@@ -22,7 +22,9 @@ export default function StudentDashboard() {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const res = await ax.get(conf.fetchStudentAnnouncementEndpoint(user.username));
+      const res = await ax.get(
+        conf.fetchStudentAnnouncementEndpoint(user.username)
+      );
       const scoreData = res.data.data;
 
       const subjects = await fetchSubject();
@@ -39,8 +41,10 @@ export default function StudentDashboard() {
         ...score,
         announcement: {
           ...score.announcement,
-          subject_name: subjectMap[score.announcement.subject_id]?.subject_name || "null",
-          subject_code: subjectMap[score.announcement.subject_id]?.subject_code || "null",
+          subject_name:
+            subjectMap[score.announcement.subject_id]?.subject_name || "null",
+          subject_code:
+            subjectMap[score.announcement.subject_id]?.subject_code || "null",
         },
       }));
       setSubjectList(subjectList);
@@ -53,7 +57,6 @@ export default function StudentDashboard() {
   };
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line
   }, [isLoginPending]);
 
   return isLoading ? (
@@ -62,21 +65,35 @@ export default function StudentDashboard() {
     <div className="flex flex-col h-screen w-screen gap-4 mt-12">
       <StudenInfoBox studentname={user.Name} studentid={user.username} />
 
-      <h1 className="text-4xl font-bold text-center text-black mb-8">School-Record</h1>
+      <h1 className="text-4xl font-bold text-center text-black mb-8">
+        School-Record
+      </h1>
       <SearchBar onSearch={(term) => setSearchTerm(term)} />
 
-      <div className="flex flex-col gap-5 overflow-y-scroll">
+      <div className="flex flex-col gap-5 px-2 pb-2 ">
         {data ? (
           data
             .filter((score) => score.announcement?.postStatus === "publish")
             .filter((score) => {
               const lowerCaseSearchTerm = searchTerm.toLowerCase();
               return (
-                score.announcement.subject_name.toLowerCase().includes(lowerCaseSearchTerm) ||
-                score.announcement.Teacher?.[0]?.Name.toLowerCase().includes(lowerCaseSearchTerm) ||
-                score.announcement.Title?.toLowerCase().includes(lowerCaseSearchTerm) || // ค้นหาจากชื่อครู
+                score.announcement.subject_name
+                  .toLowerCase()
+                  .includes(lowerCaseSearchTerm) ||
+                score.announcement.subject_code
+                  .toLowerCase()
+                  .includes(lowerCaseSearchTerm) ||
+                score.announcement.Teacher?.[0]?.Name.toLowerCase().includes(
+                  lowerCaseSearchTerm
+                ) ||
+                score.announcement.Title?.toLowerCase().includes(
+                  lowerCaseSearchTerm
+                ) || // ค้นหาจากชื่อครู
                 score.score.toString().includes(lowerCaseSearchTerm) || // ค้นหาจากคะแนน
-                (score.score > score.announcement.max_score / 2 ? "Pass" : "Fail")
+                (score.score > score.announcement.max_score / 2
+                  ? "Pass"
+                  : "Fail"
+                )
                   .toLowerCase()
                   .includes(lowerCaseSearchTerm) // ค้นหาจากสถานะ (Pass/Fail)
               );
@@ -91,7 +108,11 @@ export default function StudentDashboard() {
                 Subject={score.announcement.subject_name}
                 Score={score.score}
                 MaxScore={score.announcement.max_score}
-                Status={score.score > score.announcement.max_score / 2 ? "Pass" : "Fail"}
+                Status={
+                  score.score > score.announcement.max_score / 2
+                    ? "Pass"
+                    : "Fail"
+                }
                 Date={score.updatedAt}
                 Auditor={score.announcement.Teacher?.[0]?.Name}
               />

@@ -6,10 +6,14 @@ const UserDetails = React.memo(({ user, logout }) => {
   if (!user) return null;
 
   return (
-    <div className="flex flex-row text-white">
+    <div className="flex bg-gradient-to-l  flex-row text-white">
       Login as : {user.username}
       <span className=" ml-4 hover:underline">
-        <button href="/#" onClick={logout} className="flex flex-row items-center">
+        <button
+          href="/#"
+          onClick={logout}
+          className="flex flex-row items-center"
+        >
           <ArrowRightEndOnRectangleIcon className="size-5 " />
           Logout
         </button>
@@ -21,11 +25,14 @@ const UserDetails = React.memo(({ user, logout }) => {
 export default function NavigationBar() {
   const { user, logout } = useAuth();
   return (
-    <nav className="bg-primarydark">
+    <nav className=" bg-primarydark">
       <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
         {/* Logo Section */}
         <div className="w-fit">
-          <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <a
+            href="/"
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+          >
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               PSU Registrar System
             </span>
