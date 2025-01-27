@@ -28,12 +28,12 @@ export default function AnnouncementInfo(props) {
         <input
           disabled={!props.edit}
           type="text"
-          id="title"
-          value={props.announcement.title}
+          id="Title"
+          value={props.announcement.Title}
           onChange={(e) =>
             props.setAnnouncement((prev) => ({
               ...prev,
-              title: e.target.value,
+              Title: e.target.value,
             }))
           }
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

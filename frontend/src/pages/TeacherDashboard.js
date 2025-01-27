@@ -187,7 +187,7 @@ export default function TeacherDashboard() {
               <TeacherScoreCard
                 key={announcement.id}
                 id={announcement.id}
-                title={announcement.Title}
+                Title={announcement.Title}
                 name={announcement.subject_name}
                 subject_code={announcement.subject_code}
                 subject_name={announcement.subject_name}

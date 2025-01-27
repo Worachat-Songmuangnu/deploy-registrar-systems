@@ -15,7 +15,7 @@ export default function CreateAnnouncement() {
   const { user } = useAuth();
 
   const [announcement, setAnnouncement] = useState({
-    title: "",
+    Title: "",
     subject_name: "",
     max_score: "",
   });
@@ -59,7 +59,7 @@ export default function CreateAnnouncement() {
 
     const announcementData = {
       data: {
-        Title: announcement.title || "",
+        Title: announcement.Title || "",
         subject: announcement.subject_id || null,
         subject_id: announcement.subject_id || null,
         max_score: announcement.max_score,
