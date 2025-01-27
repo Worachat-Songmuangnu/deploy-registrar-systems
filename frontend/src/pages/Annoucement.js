@@ -25,9 +25,7 @@ export default function Annoucement() {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const res = await ax.get(
-        conf.fetchTeacherAnnouncementEndpoint(user.username, announcementId)
-      );
+      const res = await ax.get(conf.fetchTeacherAnnouncementEndpoint(user.username, announcementId));
       setAnnouncement(res.data.data[0]);
       setScores(res.data.data[0].scores);
     } catch (e) {
@@ -79,7 +77,8 @@ export default function Annoucement() {
       documentId: announcement.documentId,
       data: {
         Title: announcement.Title,
-        subject_name: announcement.subject_name,
+        subject: announcement.subject_id || null,
+        subject_id: announcement.subject_id || null,
         max_score: announcement.max_score,
         Teacher: { connect: { id: user.id } },
       },
@@ -110,33 +109,20 @@ export default function Annoucement() {
             <p className="text-3xl">{announcement && announcement.Title}</p>
           </div>
           <label className="inline-flex items-center cursor-pointer gap-4">
-            <span className="ms-3 text-sm font-medium text-gray-900">
-              Edit Annoucement
-            </span>
-            <input
-              type="checkbox"
-              checked={edit}
-              onChange={(e) => setEdit(!edit)}
-              className="sr-only peer"
-            />
+            <span className="ms-3 text-sm font-medium text-gray-900">Edit Annoucement</span>
+            <input type="checkbox" checked={edit} onChange={(e) => setEdit(!edit)} className="sr-only peer" />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600 "></div>
           </label>
         </div>
         <HrLine />
         <form onSubmit={(e) => handleSave(e)} className="flex flex-col ">
-          <AnnouncementInfo
-            edit={edit}
-            announcement={announcement}
-            setAnnouncement={setAnnouncement}
-          />
+          <AnnouncementInfo edit={edit} announcement={announcement} setAnnouncement={setAnnouncement} />
           <div className="mt-4">
             <EditableTable
               scores={scores}
               maxScore={announcement.max_score}
               edit={edit}
-              handleChange={(id, field, value) =>
-                handleChange(setScores, id, field, value)
-              }
+              handleChange={(id, field, value) => handleChange(setScores, id, field, value)}
               handleAddRow={(count) => handleAddRow(scores, setScores, count)}
               handleDeleteRow={(e, id) => handleDeleteRow(setScores, e, id)}
             />

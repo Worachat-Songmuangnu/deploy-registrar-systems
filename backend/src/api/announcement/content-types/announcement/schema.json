@@ -24,7 +24,7 @@
     },
     "subject_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "subject_id": {
       "type": "string"
@@ -46,6 +46,12 @@
     },
     "postStatus": {
       "type": "string"
+    },
+    "subject": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "announcements"
     }
   }
 }

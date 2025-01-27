@@ -14,3 +14,8 @@ export const updateScoreCondition = (scores) => {
     }
   });
 };
+
+export const fetchSubject = async () => {
+  const responese = await ax.get(conf.fetchAllSubject);
+  return responese.data;
+};
