@@ -15,6 +15,7 @@ export default function StudentDashboard() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [subjectList, setSubjectList] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // ใช้ เก็บค่าคำค้นหา
   useEffect(() => {
     console.log(data);
@@ -47,7 +48,7 @@ export default function StudentDashboard() {
             subjectMap[score.announcement.subject_id]?.subject_code || "null",
         },
       }));
-      setSubjectList(subjectList);
+      setSubjectList(subjectListData);
       setData(enrichedAnnouncements);
     } catch (e) {
       console.log(e);
@@ -68,12 +69,36 @@ export default function StudentDashboard() {
       <h1 className="text-4xl font-bold text-center text-black mb-8">
         School-Record
       </h1>
-      <SearchBar onSearch={(term) => setSearchTerm(term)} />
-
+      <div className="flex flex-row gap-5 justify-center">
+        <div className="flex flex-row w-4/6">
+          <SearchBar onSearch={(term) => setSearchTerm(term)} />
+        </div>
+        <select
+          id="subject"
+          value={selectedSubject}
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          className="border bg-white border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/6 p-2.5"
+        >
+          <option value="">Select a subject</option>
+          {subjectList?.map((subject) => (
+            <option key={subject.id} value={subject.id}>
+              {subject.subject_id.slice(0, 3)}-{subject.subject_id.slice(3)}{" "}
+              {subject.Name}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="flex flex-col gap-5 px-2 pb-2 ">
         {data ? (
           data
             .filter((score) => score.announcement?.postStatus === "publish")
+            .filter((score) => {
+              // กรองข้อมูลตามวิชาที่เลือก
+              if (selectedSubject) {
+                return score.announcement.subject_id === selectedSubject;
+              }
+              return true; // หากไม่มีการเลือกวิชา ให้แสดงผลทั้งหมด
+            })
             .filter((score) => {
               const lowerCaseSearchTerm = searchTerm.toLowerCase();
               return (
