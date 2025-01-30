@@ -17,6 +17,7 @@ const conf = {
   fetchStudentAnnouncementEndpoint: (username) =>
     `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate[announcement][populate][1]=subject&populate=students&filters[username]=${username}`,
   fetchAllSubject: `/subjects`,
+  addSubject: `/subjects`,
 };
 
 export default conf;

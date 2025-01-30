@@ -137,7 +137,7 @@ export default function TeacherDashboard() {
       <div className="mb-12">
         <p className=" text-4xl  text-center">Your Annoucement</p>
       </div>
-      <div className="w-full flex flex-row justify-between h-10">
+      <div className="w-full flex flex-row justify-between h-10 gap-4">
         <div className="flex flex-row w-full gap-4">
           <SearchBar onSearch={(term) => setSearchTerm(term)} />
         </div>
@@ -154,6 +154,13 @@ export default function TeacherDashboard() {
         >
           <PlusCircleIcon className="size-5 " />
           Add Annoucement
+        </button>
+        <button
+          onClick={() => navigate("/teacher/addsubject")}
+          className="flex flex-row text-nowrap items-center gap-2 w-fit px-8 py-1.5 shadow-md transition hover:bg-blue-500 hover:shadow-lg bg-primarydark text-white font-semibold rounded-lg"
+        >
+          <PlusCircleIcon className="size-5 " />
+          Add Subject
         </button>
       </div>
       <HrLine />

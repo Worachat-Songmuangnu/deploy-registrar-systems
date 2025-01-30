@@ -12,6 +12,7 @@ import { ProtectedStudentRoute } from "./context/ProtectedStudentRoute";
 import { ProtectedTeacherRoute } from "./context/ProtectedTeacherRoute";
 import Annoucement from "./pages/Annoucement";
 import CreateAnnouncement from "./pages/CreateAnnouncement";
+import Addsubject from "./pages/AddSubject";
 
 function App() {
   return (
@@ -69,6 +70,14 @@ function App() {
             element={
               <ProtectedTeacherRoute>
                 <Annoucement />
+              </ProtectedTeacherRoute>
+            }
+          />
+          <Route
+            path="/teacher/addsubject"
+            element={
+              <ProtectedTeacherRoute>
+                <Addsubject />
               </ProtectedTeacherRoute>
             }
           />
