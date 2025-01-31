@@ -9,8 +9,8 @@ import ExportExcel from "./ExportExcel";
 export default function TeacherScoreCard(props) {
   const navigate = useNavigate();
   return (
-    <div className="w-full shadow-primarydark border-2 h-fit rounded-lg flex flex-row p-5">
-      <div className="flex flex-col w-full justify-between">
+    <div className="w-full border-2 h-fit rounded-lg flex flex-row p-5 shadow-lg hover:shadow-xl transition duration-300 ease-in-out ">
+      <div className="flex flex-col w-full justify-between ">
         <div>
           <p className="font-bold text-lg text-primarydark">{props.Title}</p>
           <p className=" text-lg text-primarydark">
