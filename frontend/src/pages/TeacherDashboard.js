@@ -16,6 +16,9 @@ import conf from "../conf/main";
 import dayjs from "dayjs";
 import SearchBar from "../components/SearchBar"; // นำเข้า Component Search
 import { fetchSubject } from "../utils/crudAPI";
+import AnnouncementsList from "../components/AnnouncementsList";
+import ModalBase from "../components/ModalBase";
+import ArchiveModal from "../components/ArchiveModal";
 export default function TeacherDashboard() {
   const { user, isLoginPending } = useAuth();
   const [announcements, setAnnouncements] = useState(null);
@@ -26,8 +29,8 @@ export default function TeacherDashboard() {
   const [subjectList, setSubjectList] = useState(null);
 
   useEffect(() => {
-    console.log(announcements);
-  }, [announcements]);
+    console.log(showArchivePopup);
+  }, [showArchivePopup]);
 
   const fetchData = async () => {
     try {
@@ -165,53 +168,24 @@ export default function TeacherDashboard() {
       </div>
       <HrLine />
       <div className="flex flex-col gap-5">
-        {announcements ? (
-          announcements
-            .filter((announcement) => announcement.postStatus === "publish")
-            .filter((announcement) => {
-              const lowerCaseSearchTerm = searchTerm.toLowerCase();
-              return (
-                announcement.Title.toLowerCase().includes(
-                  lowerCaseSearchTerm
-                ) || // ค้นหาจากชื่อประกาศ
-                announcement.subject_name
-                  .toLowerCase()
-                  .includes(lowerCaseSearchTerm) || // ค้นหาจากชื่อวิชา
-                announcement.postStatus
-                  .toLowerCase()
-                  .includes(lowerCaseSearchTerm) || // ค้นหาจากสถานะ
-                announcement.createdAt
-                  .toLowerCase()
-                  .includes(lowerCaseSearchTerm) || // ค้นหาจากวันที่สร้าง
-                announcement.updatedAt
-                  .toLowerCase()
-                  .includes(lowerCaseSearchTerm) || // ค้นหาจากวันที่อัปเดต
-                announcement.max_score.toString().includes(lowerCaseSearchTerm)
-              );
-            })
-            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-            .map((announcement) => (
-              <TeacherScoreCard
-                key={announcement.id}
-                id={announcement.id}
-                Title={announcement.Title}
-                name={announcement.subject_name}
-                subject_code={announcement.subject_code}
-                subject_name={announcement.subject_name}
-                create={announcement.createdAt}
-                update={announcement.updatedAt}
-                scores={announcement.scores.data}
-                total={announcement.scores.length}
-                max_score={announcement.max_score}
-                status={announcement.postStatus}
-                handleArchive={handleArchive}
-              />
-            ))
-        ) : (
-          <p className="text-center text-gray-500">No announcements found.</p>
-        )}
+        <AnnouncementsList
+          announcements={announcements}
+          searchTerm={searchTerm}
+          handleArchive={handleArchive}
+        />
       </div>
-      {showArchivePopup && (
+      <ModalBase
+        name={"Archived Announcements"}
+        isOpen={showArchivePopup}
+        onClose={() => setShowArchivePopup(false)}
+      >
+        <ArchiveModal
+          onClose={() => setShowArchivePopup(false)}
+          announcements={announcements}
+          handlePublish={handlePublish}
+        />
+      </ModalBase>
+      {/* {showArchivePopup && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white w-2/3 max-h-3/4 p-6 rounded-lg overflow-auto">
             <div className="flex justify-between items-center mb-4">
@@ -270,7 +244,7 @@ export default function TeacherDashboard() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
