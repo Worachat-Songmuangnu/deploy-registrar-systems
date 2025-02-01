@@ -11,13 +11,18 @@ import { useNavigate } from "react-router";
 import { useCookie } from "./useCookie";
 import conf from "../conf/main";
 import ax, { axData } from "../conf/ax";
+import ModalBase from "../components/ModalBase";
+import LoginSuccess from "../components/LoginSuccess";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [jwt, setJwt, removeJwt] = useCookie("user", null);
   const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [isLoginPending, setIsLoginPending] = useState(true);
+  const [errMsg, setErrMsg] = useState(null);
   const navigate = useNavigate();
 
   const updateJwt = useCallback(
@@ -52,6 +57,10 @@ export const AuthProvider = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    console.log(showModal);
+  }, [showModal]);
+
   const login = useCallback(
     async (formData) => {
       try {
@@ -76,14 +85,23 @@ export const AuthProvider = ({ children }) => {
 
         setJwt({ jwt }, cookieOptions, formData.rememberMe);
         setUser({ ...userData, role });
+        setLoginSuccess(true);
+        setShowModal(true);
         if (role === "student") {
           navigate("/student/dashboard", { replace: true });
         } else if (role === "teacher") {
           navigate("/teacher/dashboard", { replace: true });
         }
+        setErrMsg(null);
       } catch (error) {
-        console.error("Login failed:", error.message || "An error occurred");
-        alert("Login failed. Please check your credentials.");
+        console.log(error.status);
+        if (error.status === 400) {
+          console.error("Login failed:", "username or password is incorrect");
+          setErrMsg("Login failed: username or password is incorrect");
+        } else {
+          console.error("Login failed:", error.message || "An error occurred");
+          setErrMsg("Login failed: An error occurred");
+        }
       }
     },
     [navigate, setUser, setJwt, updateJwt]
@@ -97,16 +115,26 @@ export const AuthProvider = ({ children }) => {
 
   const contextValue = useMemo(
     () => ({
+      errMsg,
       isLoginPending,
       user,
       login,
       logout,
     }),
-    [isLoginPending, user, login, logout]
+    [errMsg, isLoginPending, user, login, logout]
   );
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>
+      <div>{children}</div>
+      <ModalBase
+        isOpen={showModal}
+        setIsOpen={setShowModal}
+        countDown={() => setTimeout(() => setShowModal(false), 2500)}
+      >
+        <LoginSuccess />
+      </ModalBase>
+    </AuthContext.Provider>
   );
 };
 
