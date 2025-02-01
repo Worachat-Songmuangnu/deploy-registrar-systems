@@ -93,6 +93,7 @@ export default function TeacherDashboard() {
       };
 
       await updateAnnoucement(announcementData);
+      setShowArchivePopup(true);
       fetchData();
     } catch (e) {
       console.error("Error archiving announcement:", e);
