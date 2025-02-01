@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
 import { useNavigate } from "react-router-dom";
-import ModalBase from "../components/ModalBase";
 
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,14 +20,12 @@ export default function SignIn() {
         navigate("/teacher/dashboard", { replace: true });
       }
     }
-  }, [user]);
+  }, [user, navigate]);
   const handleLogin = async () => {
     try {
       setIsLoading(true);
-      // setErrMsg(null);
       await login({ identifier, password, rememberMe });
     } catch (e) {
-      // setErrMsg(e.message);
       console.log(e);
     } finally {
       setIsLoading(false);
