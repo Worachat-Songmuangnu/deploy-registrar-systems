@@ -13,7 +13,7 @@ const ArchiveModal = ({ onClose, announcements, handlePublish }) => {
         </button>
       </div>
       <HrLine />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 overflow-y-auto max-h-96 ">
         {announcements &&
         announcements.filter(
           (announcement) => announcement.postStatus === "archive"
