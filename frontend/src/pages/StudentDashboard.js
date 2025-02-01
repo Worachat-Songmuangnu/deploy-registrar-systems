@@ -17,9 +17,7 @@ export default function StudentDashboard() {
   const [subjectList, setSubjectList] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // ใช้ เก็บค่าคำค้นหา
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -56,8 +54,10 @@ export default function StudentDashboard() {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [isLoginPending]);
 
   return isLoading ? (
@@ -79,7 +79,7 @@ export default function StudentDashboard() {
           onChange={(e) => setSelectedSubject(e.target.value)}
           className="border bg-white border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/6 p-2.5"
         >
-          <option value="">Select a subject</option>
+          <option value="">All Subject</option>
           {subjectList?.map((subject) => (
             <option key={subject.id} value={subject.id}>
               {subject.subject_id.slice(0, 3)}-{subject.subject_id.slice(3)}{" "}

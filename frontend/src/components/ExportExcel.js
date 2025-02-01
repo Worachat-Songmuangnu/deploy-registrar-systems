@@ -3,7 +3,6 @@ import * as XLSX from "xlsx";
 import ax from "../conf/ax";
 import dayjs from "dayjs";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
-import { fetchExportExcel } from "../conf/main";
 export default function ExportExcel({ title }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -12,9 +11,10 @@ export default function ExportExcel({ title }) {
       setIsLoading(true);
 
       const res = await ax.get(
+        // TODO: Fix the exportToExcel function seem like teacher cannot access by using this query string
         `/announcements?populate=scores&filters[Title]=${title}`
       );
-      const scores = res.data.data[0]?.scores || [];
+      const scores = res.data.data[0]?.scores;
 
       if (scores.length === 0) {
         alert("No data to export!");
@@ -37,12 +37,15 @@ export default function ExportExcel({ title }) {
       XLSX.writeFile(workbook, fileName);
     } catch (e) {
       alert("Failed to export data.");
+      console.error(e);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return (
+  return isLoading ? (
+    <></>
+  ) : (
     <div className="flex flex-col gap-3 text-white w-40 ">
       <button
         onClick={exportToExcel}

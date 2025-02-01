@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
   const [jwt, setJwt, removeJwt] = useCookie("user", null);
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
   const [isLoginPending, setIsLoginPending] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
   const navigate = useNavigate();
@@ -57,10 +56,6 @@ export const AuthProvider = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log(showModal);
-  }, [showModal]);
-
   const login = useCallback(
     async (formData) => {
       try {
@@ -85,7 +80,6 @@ export const AuthProvider = ({ children }) => {
 
         setJwt({ jwt }, cookieOptions, formData.rememberMe);
         setUser({ ...userData, role });
-        setLoginSuccess(true);
         setShowModal(true);
         if (role === "student") {
           navigate("/student/dashboard", { replace: true });
@@ -132,7 +126,7 @@ export const AuthProvider = ({ children }) => {
         setIsOpen={setShowModal}
         countDown={() => setTimeout(() => setShowModal(false), 2500)}
       >
-        <LoginSuccess />
+        <LoginSuccess setIsOpen={setShowModal} />
       </ModalBase>
     </AuthContext.Provider>
   );

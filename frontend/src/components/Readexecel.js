@@ -1,6 +1,5 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import readXlsxFile from "read-excel-file";
-import { handleDeleteRow } from "../utils/handle";
 
 export default function ReadExcel(props) {
   const fileInputRef = useRef(null);
@@ -20,8 +19,7 @@ export default function ReadExcel(props) {
         const dataWithIds = rows.slice(1).map((row, index) => ({
           id: index, // Unique identifier for each row
           username: String(row[0]),
-          name: String(row[1]),
-          score: String(row[2]),
+          score: String(row[1]),
         }));
         props.setScores((prevData) => [...prevData, ...dataWithIds]);
       });

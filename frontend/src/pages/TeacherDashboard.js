@@ -1,12 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import TeacherScoreCard from "../components/TeacherScoreCard";
-import { ArchiveBoxArrowDownIcon } from "@heroicons/react/24/outline";
-import {
-  MagnifyingGlassIcon,
-  PlusCircleIcon,
-  PaperAirplaneIcon,
-  EyeIcon,
-} from "@heroicons/react/24/outline";
+import { PlusCircleIcon, EyeIcon } from "@heroicons/react/24/outline";
 import HrLine from "../components/HrLine";
 import ax from "../conf/ax";
 import { useEffect, useState } from "react";
@@ -93,7 +86,6 @@ export default function TeacherDashboard() {
       };
 
       await updateAnnoucement(announcementData);
-      setShowArchivePopup(true);
       fetchData();
     } catch (e) {
       console.error("Error archiving announcement:", e);
@@ -121,6 +113,7 @@ export default function TeacherDashboard() {
       };
 
       await updateAnnoucement(announcementData);
+      setShowArchivePopup(true);
       fetchData();
     } catch (e) {
       console.error("Error archiving announcement:", e);
