@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 
 export default function LoginSuccess({ setIsOpen }) {
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 w-96 text-center relative mx-auto">
+    <div className="bg-white rounded-lg shadow-xl p-6 w-96 text-center relative mx-auto">
       {/* Close button */}
       <button
         onClick={() => setIsOpen(false)}
