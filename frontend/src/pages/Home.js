@@ -16,7 +16,6 @@ export default function Home() {
         </p>
         <p className="text-white text-2xl  mt-5 mb-20">
           This is website for grading system in Prince of Songkhla University
-          {process.env.STATUS}
         </p>
         {user ? (
           <button

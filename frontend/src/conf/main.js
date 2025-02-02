@@ -1,5 +1,5 @@
 const apiUrlPrefix =
-  process.env.STATUS === "production"
+  process.env.REACT_APP_STATUS === "production"
     ? "https://deploy-registrar-systems-production.up.railway.app/api"
     : "http://localhost:1337/api";
 
