@@ -9,8 +9,10 @@ const StudentCard = (props) => {
     Pending: "bg-yellow-100 text-yellow-800",
   };
 
-  const progressWidth = Math.round((props.Score / props.MaxScore) * 100);
-
+  const progressWidth = Math.min(
+    100,
+    Math.round((props.Score / props.MaxScore) * 100)
+  );
   return (
     <div className="flex flex-col max-w-full p-6  bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
       <div className="flex flex-row justify-between gap-4">

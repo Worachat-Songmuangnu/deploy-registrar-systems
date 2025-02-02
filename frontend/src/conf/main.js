@@ -1,5 +1,6 @@
 const conf = {
-  apiUrlPrefix: "http://localhost:1337/api",
+  apiUrlPrefix:
+    "https://deploy-registrar-systems-production.up.railway.app/api",
   loginEndpoint: "/auth/local",
   jwtSessionStorageKey: "auth.jwt",
   jwtRoleEndpoint: "users/me?populate=role",
