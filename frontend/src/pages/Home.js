@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import { ChartBarIcon, ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  ChartBarIcon,
+  ArrowLeftEndOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -8,9 +11,12 @@ export default function Home() {
   return (
     <div className="h-screen flex flex-col w-full bg-gradient-to-b from-primarydark to-primarylight ">
       <div className="flex flex-col justify-items-center items-center ">
-        <p className="text-white text-4xl font-bold mt-48">Welcome to PSU Registrar System!</p>
+        <p className="text-white text-4xl font-bold mt-48">
+          Welcome to PSU Registrar System!
+        </p>
         <p className="text-white text-2xl  mt-5 mb-20">
           This is website for grading system in Prince of Songkhla University
+          {process.env.STATUS}
         </p>
         {user ? (
           <button
