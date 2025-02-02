@@ -3,37 +3,40 @@ import * as XLSX from "xlsx";
 import ax from "../conf/ax";
 import dayjs from "dayjs";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
-export default function ExportExcel({ title }) {
+export default function ExportExcel({ id }) {
   const [isLoading, setIsLoading] = useState(false);
-
   const exportToExcel = async () => {
     try {
       setIsLoading(true);
 
       const res = await ax.get(
-        // TODO: Fix the exportToExcel function seem like teacher cannot access by using this query string
-        `/announcements?populate=scores&filters[Title]=${title}`
+        `/announcements?populate=scores&populate=subject&filters[id]=${id}`
       );
-      const scores = res.data.data[0]?.scores;
+
+      const data = res.data.data[0];
+      const scores = data?.scores || [];
+      const subject = data?.subject || {};
 
       if (scores.length === 0) {
         alert("No data to export!");
         return;
       }
 
+      const title = data?.Title || "Export";
+      const subjectName = subject?.Name || "";
+      const maxScore = data?.max_score || "N/A";
+      const date = dayjs(data?.updatedAt).format("MMM D, YYYY h:mm A");
+
       const formatData = scores.map((score) => ({
         "Student ID": score.username,
-        Name: score.name,
-        Score: score.score,
-        "Post Date": dayjs(score.updatedAt).format("MMM D, YYYY h:mm A"),
+        [`Score (${maxScore})`]: score.score,
       }));
-
-      console.log(scores);
 
       const worksheet = XLSX.utils.json_to_sheet(formatData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Scores");
-      const fileName = `${title || "Export"}_Scores.xlsx`;
+
+      const fileName = `${title} ${subjectName}_Scores.xlsx`;
       XLSX.writeFile(workbook, fileName);
     } catch (e) {
       alert("Failed to export data.");

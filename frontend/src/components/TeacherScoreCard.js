@@ -49,7 +49,7 @@ export default function TeacherScoreCard(props) {
           <ArchiveBoxArrowDownIcon className="size-5" />
           Archive
         </button>
-        <ExportExcel title={props.title} />
+        <ExportExcel id={props.id} />
       </div>
     </div>
   );
