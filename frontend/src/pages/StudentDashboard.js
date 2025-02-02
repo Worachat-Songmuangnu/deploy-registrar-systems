@@ -6,9 +6,7 @@ import { useAuth } from "../context/useAuth";
 import ax from "../conf/ax";
 import { useEffect, useState } from "react";
 import conf from "../conf/main";
-import StudenInfoBox from "../components/StudentInfoBox";
 import Loading from "../components/Loading";
-import { fetchSubject } from "../utils/crudAPI";
 
 export default function StudentDashboard() {
   const { user, isLoginPending } = useAuth();
@@ -18,9 +16,6 @@ export default function StudentDashboard() {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // ใช้ เก็บค่าคำค้นหา
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -28,9 +23,13 @@ export default function StudentDashboard() {
         conf.fetchStudentAnnouncementEndpoint(user.username)
       );
       const scoreData = res.data.data;
-
-      const subjects = await fetchSubject();
-      const subjectListData = subjects.data;
+      console.log(scoreData);
+      const subjects = Array.from(
+        new Set(
+          scoreData.map((score) => JSON.stringify(score.announcement.subject))
+        )
+      ).map((subject) => JSON.parse(subject));
+      const subjectListData = subjects;
       const subjectMap = subjectListData.reduce((map, subject) => {
         map[subject.id] = {
           subject_name: subject.Name,
@@ -67,8 +66,6 @@ export default function StudentDashboard() {
     <Loading />
   ) : (
     <div className="flex flex-col h-screen w-screen gap-4 mt-12">
-      <StudenInfoBox studentname={user.Name} studentid={user.username} />
-
       <h1 className="text-4xl font-bold text-center text-black mb-8">
         School-Record
       </h1>
