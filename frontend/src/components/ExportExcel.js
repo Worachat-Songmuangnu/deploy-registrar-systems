@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import ax from "../conf/ax";
-import dayjs from "dayjs";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import conf from "../conf/main";
 export default function ExportExcel({ id }) {
   const [isLoading, setIsLoading] = useState(false);
   const exportToExcel = async () => {
     try {
       setIsLoading(true);
 
-      const res = await ax.get(
-        `/announcements?populate=scores&populate=subject&filters[id]=${id}`
-      );
+      const res = await ax.get(conf.exportExcel(id));
 
       const data = res.data.data[0];
       const scores = data?.scores || [];
@@ -25,7 +23,6 @@ export default function ExportExcel({ id }) {
       const title = data?.Title || "Export";
       const subjectName = subject?.Name || "";
       const maxScore = data?.max_score || "N/A";
-      const date = dayjs(data?.updatedAt).format("MMM D, YYYY h:mm A");
 
       const formatData = scores.map((score) => ({
         "Student ID": score.username,

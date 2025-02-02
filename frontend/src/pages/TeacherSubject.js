@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
 import Loading from "../components/Loading";
 import SearchBar from "../components/SearchBar";
-import { fetchTeacherSubject } from "../utils/crudAPI";
+import { fetchTeacherSubject, updateScoreCondition } from "../utils/crudAPI";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import TeacherSubjectCard from "./TeacherSubjectCard";
+import ax from "../conf/ax";
 
 export default function TeacherSubject() {
   const { user, isLoginPending } = useAuth();
@@ -15,6 +16,10 @@ export default function TeacherSubject() {
   const [searchTerm, setSearchTerm] = useState("");
   const [subject, setSubject] = useState(null);
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   console.log(subject);
+  // }, [subject]);
 
   const fetchData = async () => {
     try {
@@ -28,6 +33,41 @@ export default function TeacherSubject() {
       setIsLoading(false);
     }
   };
+
+  const handleDeleteSubject = async (id) => {
+    try {
+      setIsLoading(true);
+      const targetSubject = subject.find((s) => s.id === id);
+      console.log(targetSubject);
+
+      // Delete subject
+      await ax.delete(`/subjects/${targetSubject.documentId}`);
+
+      // Delete all announcements of the subject
+      const targetAnnouncement = targetSubject.announcements;
+      await Promise.all(
+        targetAnnouncement.map(async (announcement) => {
+          await ax.delete(`/announcements/${announcement.documentId}`);
+        })
+      );
+
+      // Delete all scores of the subject
+      const targetScores = targetAnnouncement.flatMap((announcement) =>
+        announcement.scores.map((score) => ({
+          status: "delete",
+          documentId: score.documentId || null,
+        }))
+      );
+      await Promise.all(updateScoreCondition(targetScores));
+      await fetchData();
+      console.log("Subject deleted successfully");
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line
@@ -70,7 +110,7 @@ export default function TeacherSubject() {
               <TeacherSubjectCard
                 key={index}
                 subject={subject}
-                searchTerm={searchTerm}
+                handleDeleteSubject={handleDeleteSubject}
               />
             ))
         ) : (

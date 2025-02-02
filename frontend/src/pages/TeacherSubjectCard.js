@@ -1,11 +1,12 @@
+import { TrashIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 
-export default function TeacherSubjectCard({ subject }) {
+export default function TeacherSubjectCard({ subject, handleDeleteSubject }) {
   return (
     <>
       <div className="border rounded-lg p-4 shadow-md bg-white flex flex-col gap-4">
         <div className="flex flex-row justify-between">
-          <div className="flex flex-col">
+          <div className="flex flex-col w-1/2">
             <p className="text-xl font-semibold">
               {subject.subject_id.slice(0, 3)}-{subject.subject_id.slice(3)}{" "}
               {subject.Name}
@@ -51,6 +52,15 @@ export default function TeacherSubjectCard({ subject }) {
                   </div>
                 ))}
             </div>
+          </div>
+          <div className="w-44">
+            <button
+              onClick={() => handleDeleteSubject(subject.id)}
+              className="w-full flex flex-row items-center justify-center gap-3 transition py-1.5 border-red-800 border-2 text-red-800 rounded-lg hover:bg-red-800 hover:text-white"
+            >
+              <TrashIcon className="size-5" />
+              Delete Subject
+            </button>
           </div>
         </div>
       </div>

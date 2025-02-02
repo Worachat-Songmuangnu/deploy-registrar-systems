@@ -18,12 +18,10 @@ export default function AddSubject() {
 
   const createSubject = async (subject) => {
     try {
-      const response = await ax.post(conf.addSubject, {
+      await ax.post(conf.addSubject, {
         data: subject.data,
       });
       console.log(subject.data);
-      navigate("/teacher/subject");
-      return response;
     } catch (e) {
       console.log(e);
     }
@@ -42,6 +40,7 @@ export default function AddSubject() {
     try {
       setIsLoading(true);
       await createSubject(subjectData);
+      navigate("/teacher/subject");
       alert("Subject created successfully");
     } catch (error) {
       console.error("Error creating announcement:", error);

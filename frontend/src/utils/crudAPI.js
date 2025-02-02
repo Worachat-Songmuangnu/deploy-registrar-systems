@@ -2,6 +2,7 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 
 export const updateScoreCondition = (scores) => {
+  console.log(scores);
   return scores.map(async (score) => {
     if (score.status === "delete" || score.status === "hdelete") {
       await ax.delete(conf.scoreDeleteEndpoint(score.documentId));

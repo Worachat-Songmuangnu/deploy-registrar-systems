@@ -18,8 +18,10 @@ const conf = {
     `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate[announcement][populate][1]=subject&populate=students&filters[username]=${username}`,
   fetchAllSubject: `/subjects`,
   fetchTeacherSubject: (id) =>
-    `/subjects?populate[0]=teacher&populate[1]=announcements&filters[teacher][id]=${id}`,
+    `/subjects?populate[0]=teacher&populate[1]=announcements&populate[announcements][populate][2]=scores&filters[teacher][id]=${id}`,
   addSubject: `/subjects`,
+  exportExcel: (id) =>
+    `/announcements?populate=scores&populate=subject&filters[id]=${id}`,
 };
 
 export default conf;

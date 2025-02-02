@@ -137,21 +137,21 @@ export default function TeacherDashboard() {
         <div className="flex flex-row justify-center gap-4 w-full">
           <button
             onClick={() => navigate("/teacher/subject")}
-            className="flex flex-row text-nowrap items-center gap-2 w-fit px-8 py-1.5 shadow-md transition hover:bg-green-700 hover:shadow-lg bg-green-600 text-white font-semibold rounded-lg"
+            className="flex flex-row text-nowrap justify-center items-center gap-2 w-1/2 px-8 py-1.5 shadow-md transition hover:bg-green-700 hover:shadow-lg bg-green-600 text-white font-semibold rounded-lg"
           >
             <AcademicCapIcon className="size-5 " />
             Manage Subject
           </button>
           <button
             onClick={() => setShowArchivePopup(true)}
-            className="flex flex-row text-nowrap items-center gap-4 ml-2 mr-2 w-2/5 px-5 py-1 shadow-md transition hover:bg-red-600 hover:shadow-lg boder bg-red-500 text-white font-semibold rounded-lg"
+            className="flex flex-row text-nowrap justify-center items-center gap-4 ml-2 mr-2 w-2/5 px-5 py-1 shadow-md transition hover:bg-red-600 hover:shadow-lg boder bg-red-500 text-white font-semibold rounded-lg"
           >
             <EyeIcon className="size-5 " />
             View Archived
           </button>
           <button
             onClick={() => navigate("/teacher/announcement")}
-            className="flex flex-row text-nowrap items-center gap-2 w-full px-8 py-1.5 shadow-md transition hover:bg-teal-700 hover:shadow-lg bg-teal-600 text-white font-semibold rounded-lg"
+            className="flex flex-row text-nowrap justify-center items-center gap-2 w-full px-8 py-1.5 shadow-md transition hover:bg-teal-700 hover:shadow-lg bg-teal-600 text-white font-semibold rounded-lg"
           >
             <PlusCircleIcon className="size-5 " />
             Add New Annoucement
