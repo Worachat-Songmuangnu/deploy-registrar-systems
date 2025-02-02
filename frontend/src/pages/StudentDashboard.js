@@ -18,6 +18,9 @@ export default function StudentDashboard() {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // ใช้ เก็บค่าคำค้นหา
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   const fetchData = async () => {
     try {
       setIsLoading(true);

@@ -19,3 +19,8 @@ export const fetchSubject = async () => {
   const responese = await ax.get(conf.fetchAllSubject);
   return responese.data;
 };
+
+export const fetchTeacherSubject = async (id) => {
+  const responese = await ax.get(conf.fetchTeacherSubject(id));
+  return responese.data;
+};

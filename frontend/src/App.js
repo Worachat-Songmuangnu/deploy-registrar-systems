@@ -2,9 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NavigationBar from "./components/NavBar";
-import Student from "./pages/Student";
 import StudentDashboard from "./pages/StudentDashboard";
-import Teacher from "./pages/Teacher";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import SignIn from "./pages/SignIn";
 import { AuthProvider } from "./context/useAuth";
@@ -13,6 +11,7 @@ import { ProtectedTeacherRoute } from "./context/ProtectedTeacherRoute";
 import Annoucement from "./pages/Annoucement";
 import CreateAnnouncement from "./pages/CreateAnnouncement";
 import Addsubject from "./pages/AddSubject";
+import TeacherSubject from "./pages/TeacherSubject";
 
 function App() {
   return (
@@ -24,14 +23,6 @@ function App() {
 
           {/* Student */}
           <Route
-            path="/student"
-            element={
-              <ProtectedStudentRoute>
-                <Student />
-              </ProtectedStudentRoute>
-            }
-          />
-          <Route
             path="/student/dashboard"
             element={
               <ProtectedStudentRoute>
@@ -41,14 +32,6 @@ function App() {
           />
 
           {/* Teacher */}
-          <Route
-            path="/teacher"
-            element={
-              <ProtectedTeacherRoute>
-                <Teacher />
-              </ProtectedTeacherRoute>
-            }
-          />
           <Route
             path="/teacher/dashboard"
             element={
@@ -70,6 +53,14 @@ function App() {
             element={
               <ProtectedTeacherRoute>
                 <Annoucement />
+              </ProtectedTeacherRoute>
+            }
+          />
+          <Route
+            path="/teacher/subject"
+            element={
+              <ProtectedTeacherRoute>
+                <TeacherSubject />
               </ProtectedTeacherRoute>
             }
           />
