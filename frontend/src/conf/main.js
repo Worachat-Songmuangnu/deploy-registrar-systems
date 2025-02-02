@@ -1,6 +1,10 @@
+const apiUrlPrefix =
+  process.env.STATUS === "production"
+    ? "https://deploy-registrar-systems-production.up.railway.app/api"
+    : "http://localhost:1337/api";
+
 const conf = {
-  apiUrlPrefix:
-    "https://deploy-registrar-systems-production.up.railway.app/api",
+  apiUrlPrefix,
   loginEndpoint: "/auth/local",
   jwtSessionStorageKey: "auth.jwt",
   jwtRoleEndpoint: "users/me?populate=role",
