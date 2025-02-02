@@ -9,6 +9,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import TeacherSubjectCard from "./TeacherSubjectCard";
 import ax from "../conf/ax";
+import conf from "../conf/main";
 
 export default function TeacherSubject() {
   const { user, isLoginPending } = useAuth();
@@ -16,10 +17,6 @@ export default function TeacherSubject() {
   const [searchTerm, setSearchTerm] = useState("");
   const [subject, setSubject] = useState(null);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   console.log(subject);
-  // }, [subject]);
 
   const fetchData = async () => {
     try {
@@ -38,16 +35,15 @@ export default function TeacherSubject() {
     try {
       setIsLoading(true);
       const targetSubject = subject.find((s) => s.id === id);
-      console.log(targetSubject);
 
       // Delete subject
-      await ax.delete(`/subjects/${targetSubject.documentId}`);
+      await ax.delete(conf.deleteSubject(targetSubject.documentId));
 
       // Delete all announcements of the subject
       const targetAnnouncement = targetSubject.announcements;
       await Promise.all(
         targetAnnouncement.map(async (announcement) => {
-          await ax.delete(`/announcements/${announcement.documentId}`);
+          await ax.delete(conf.deleteAnnouncement(announcement.documentId));
         })
       );
 

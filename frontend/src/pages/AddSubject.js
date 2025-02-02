@@ -21,7 +21,6 @@ export default function AddSubject() {
       await ax.post(conf.addSubject, {
         data: subject.data,
       });
-      console.log(subject.data);
     } catch (e) {
       console.log(e);
     }

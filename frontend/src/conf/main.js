@@ -22,6 +22,8 @@ const conf = {
   addSubject: `/subjects`,
   exportExcel: (id) =>
     `/announcements?populate=scores&populate=subject&filters[id]=${id}`,
+  deleteSubject: (documentId) => `/subjects/${documentId}`,
+  deleteAnnouncement: (documentId) => `/announcements/${documentId}`,
 };
 
 export default conf;

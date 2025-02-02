@@ -23,7 +23,6 @@ export default function StudentDashboard() {
         conf.fetchStudentAnnouncementEndpoint(user.username)
       );
       const scoreData = res.data.data;
-      console.log(scoreData);
       const subjects = Array.from(
         new Set(
           scoreData.map((score) => JSON.stringify(score.announcement.subject))
