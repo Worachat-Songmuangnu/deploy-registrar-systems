@@ -22,6 +22,7 @@ export default function AddSubject() {
         data: subject.data,
       });
       console.log(subject.data);
+      navigate("/teacher/subject");
       return response;
     } catch (e) {
       console.log(e);
@@ -56,7 +57,7 @@ export default function AddSubject() {
   ) : (
     <div className="flex flex-col w-full mt-3">
       <div className="flex flex-row justify-start gap-6">
-        <button className="" onClick={() => navigate("/teacher/dashboard")}>
+        <button className="" onClick={() => navigate("/teacher/subject")}>
           <ArrowLeftIcon className="size-8" />
         </button>
         <p className="text-3xl">Create New Subject</p>
@@ -65,18 +66,7 @@ export default function AddSubject() {
       <form className="flex flex-col" onSubmit={handleSave}>
         <div className="flex flex-col gap-4">
           <label className="text-sm font-semibold">
-            Subject Name
-            <input
-              type="text"
-              value={subject.Name}
-              onChange={(e) => setSubject({ ...subject, Name: e.target.value })}
-              className="mt-1 p-2 border rounded-lg w-full"
-              placeholder="Enter subject name"
-              required
-            />
-          </label>
-          <label className="text-sm font-semibold">
-            Subject ID
+            Subject ID (6 digit Ex. 123456)
             <input
               type="text"
               value={subject.subject_id}
@@ -85,6 +75,17 @@ export default function AddSubject() {
               }
               className="mt-1 p-2 border rounded-lg w-full"
               placeholder="Enter subject ID"
+              required
+            />
+          </label>
+          <label className="text-sm font-semibold">
+            Subject Name
+            <input
+              type="text"
+              value={subject.Name}
+              onChange={(e) => setSubject({ ...subject, Name: e.target.value })}
+              className="mt-1 p-2 border rounded-lg w-full"
+              placeholder="Enter subject name"
               required
             />
           </label>

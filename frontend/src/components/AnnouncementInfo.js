@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { fetchSubject } from "../utils/crudAPI";
+import { fetchTeacherSubject } from "../utils/crudAPI";
 import Loading from "./Loading";
+import { useAuth } from "../context/useAuth";
 
 export default function AnnouncementInfo(props) {
   const [subjectOptions, setSubjectOptions] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
+
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const subjects = await fetchSubject();
+      const subjects = await fetchTeacherSubject(user.id);
       setSubjectOptions(subjects.data);
     } catch (e) {
       console.log(e);
@@ -18,6 +21,7 @@ export default function AnnouncementInfo(props) {
   };
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   return isLoading ? (

@@ -17,6 +17,8 @@ const conf = {
   fetchStudentAnnouncementEndpoint: (username) =>
     `/scores?populate=announcement&populate[announcement][populate][0]=Teacher&populate[announcement][populate][1]=subject&populate=students&filters[username]=${username}`,
   fetchAllSubject: `/subjects`,
+  fetchTeacherSubject: (id) =>
+    `/subjects?populate[0]=teacher&populate[1]=announcements&filters[teacher][id]=${id}`,
   addSubject: `/subjects`,
 };
 
